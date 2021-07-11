@@ -4,7 +4,7 @@ var timeEl = document.getElementById("time");
 // Selects element by id
 var gameOverEl = document.getElementById("game-over");
 
-var secondsLeft = 10;
+var secondsLeft = 60;
 
 function setTime() {
   // Sets interval in variable
@@ -39,14 +39,15 @@ function beginGame() {
 
 startGame.addEventListener("click", beginGame);
 
-//store initials and highscores
+//store initials inputted and highscores via button increment
 var initials = document.getElementById("initialsSpan");
+var initialsText = document.getElementById("initialsText");
 var highscore = document.getElementById("highscoreSpan");
 var newInitialButton = document.getElementById("newInitials");
 var newHighscoreButton = document.getElementById("newHighscore");
 var clearButton = document.getElementById("clear");
 
-var currentInitials = localStorage.getItem("initials");
+var currentInitials = localStorage.getItem("initialsText");
 var currentHighscore = localStorage.getItem("highscore");
 
 if (currentInitials === null) {
@@ -57,9 +58,9 @@ initials.textContent = currentInitials;
 highscore.textContent = currentHighscore;
 
 newInitialButton.addEventListener("click", function(){
-  currentInitials = currentInitials + "A";
+  currentInitials = initialsText.value
   initials.textContent = currentInitials;
-  localStorage.setItem("initials", currentInitials);
+  localStorage.setItem("initialsText", currentInitials);
 });
 
 newHighscoreButton.addEventListener("click", function(){
