@@ -4,7 +4,7 @@
         <title>Accounting Quiz!</title>
     </head>
     <body>
-        <h1>Time Remaining: <span id = "time">60</span> seconds.</h1>
+        <h1>Time: <span id = "time">60</span></h1>
         <h1 id = "game-over"></h1>
         <div id = "start">
             <h1>Accounting Quiz. Press the Start button to begin.</h1>
@@ -20,6 +20,20 @@
             <h1>Highscore: <span id = "highscoreSpan"></span></h1>
             <button id = "newHighscore">Click me to add new highscore.</button>
             <button id = "clear">Click me to clear initials and highscores.</button>
+        </div>
+        <div>
+            <h1 id="questionText"></h1>
+            <ul>
+                <li><button id="buttonA"></button></li>
+                <li><button id="buttonB"></button></li>
+                <li><button id="buttonC"></button></li>
+                <li><button id="buttonD"></button></li>
+            </ul>
+            <h1 id="correct"></h1>
+            <h1 id="incorrect"></h1>
+        </div>
+        <div>
+            <h1 id="score"></h1>
         </div>
         <script src="./script.js"></script>
     </body>
