@@ -4,24 +4,24 @@
         <title>Accounting Quiz!</title>
     </head>
     <body>
-        <h1>Time: <span id = "time">60</span></h1>
+        <h1>Time: <span id = "time">30</span></h1>
         <h1 id = "game-over"></h1>
         <div id = "start">
             <h1>Accounting Quiz. Press the Start button to begin.</h1>
             <button id = "start-button">Start</button>
         </div>
-        <div>
+        <div id="initialsBox">
             <label for="initialsText">Initials</label>
             <input type="text" name="initialsText" id="initialsText" placeholder=""/>
             <button id = "newInitials">Click me to add new initials.</button>
             <h1>Initials: <span id = "initialsSpan"></span></h1>
         </div>
-        <div>
+        <div id="highscoreBox">
             <h1>Highscore: <span id = "highscoreSpan"></span></h1>
             <button id = "newHighscore">Click me to add new highscore.</button>
             <button id = "clear">Click me to clear initials and highscores.</button>
         </div>
-        <div>
+        <div id="questionBox">
             <h1 id="questionText"></h1>
             <ul>
                 <li><button id="buttonA"></button></li>
@@ -32,8 +32,11 @@
             <h1 id="correct"></h1>
             <h1 id="incorrect"></h1>
         </div>
-        <div>
-            <h1 id="score"></h1>
+        <div id=scoreBox>
+            <h1>Score: <span id="score">0</span></h1>
+        </div>
+        <div id="goBackBox">
+            <button id="goBack">Go Back</button>
         </div>
         <script src="./script.js"></script>
     </body>

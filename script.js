@@ -1,20 +1,40 @@
-// Selects element by class
 var timeEl = document.getElementById("time");
-
-// Selects element by id
 var gameOverEl = document.getElementById("game-over");
+var secondsLeft = 30;
+var timerInterval = null;
 
-var secondsLeft = 60;
+function startScreen() {
+  document.getElementById("initialsBox").style.display = "none";
+  document.getElementById("highscoreBox").style.display = "none";
+  document.getElementById("questionBox").style.display = "none";
+  document.getElementById("goBackBox").style.display = "none";
+  document.getElementById("start").style.display = "block"
+  gameOverEl.style.display = "none";
+}
+
+startScreen();
+
+var startGame = document.getElementById("start-button");
+var score = 0;
+
+function beginGame() {
+    score = 0;
+    var startDisplay = document.getElementById("start");
+    startDisplay.style.display = "none";
+    document.getElementById("questionBox").style.display = "block";
+    setTime();
+    askQuestions();
+}
+
+startGame.addEventListener("click", beginGame);
 
 function setTime() {
   // Sets interval in variable
-  var timerInterval = setInterval(function() {
+  timerInterval = setInterval(function() {
     secondsLeft--;
     timeEl.textContent = secondsLeft;
 
-    if(secondsLeft === 0) {
-      // Stops execution of action at set interval
-      clearInterval(timerInterval);
+    if(secondsLeft <= 0) {
       // Calls function to display game over message
       endQuiz();
     }
@@ -24,26 +44,19 @@ function setTime() {
 
 // Function to send game over message
 function endQuiz() {
-  timeEl.textContent = " ";
+  clearInterval(timerInterval);
+  timeEl.textContent = 0;
   gameOverEl.textContent = "End of Quiz";
-
+  document.getElementById("initialsBox").style.display = "block";
+  document.getElementById("highscoreBox").style.display = "block";
+  document.getElementById("goBackBox").style.display = "block";
+  document.getElementById("questionBox").style.display = "none";
 }
 
-var startGame = document.getElementById("start-button");
+var goBackButton = document.getElementById("goBack");
+goBackButton.addEventListener("click", startScreen);
 
-var score = 0;
-
-function beginGame() {
-    score = 0;
-    var startDisplay = document.getElementById("start");
-    startDisplay.style.display = "none";
-    setTime();
-    askQuestions();
-}
-
-startGame.addEventListener("click", beginGame);
-
-//store initials inputted and highscores via button increment, display on screen
+//store initials inputted and highscores via buttons, display on screen
 var initials = document.getElementById("initialsSpan");
 var initialsText = document.getElementById("initialsText");
 var highscore = document.getElementById("highscoreSpan");
@@ -52,25 +65,29 @@ var newHighscoreButton = document.getElementById("newHighscore");
 var clearButton = document.getElementById("clear");
 
 var currentInitials = localStorage.getItem("initialsText");
-var currentHighscore = localStorage.getItem("highscore");
+var currentHighscore = localStorage.getItem("highscoreSpan");
 
 if (currentInitials === null) {
   currentInitials = "";
+}
+
+if (currentHighscore === null) {
+  currentHighscore = "";
 }
 
 initials.textContent = currentInitials;
 highscore.textContent = currentHighscore;
 
 newInitialButton.addEventListener("click", function(){
-  currentInitials = initialsText.value
+  currentInitials = initialsText.value;
   initials.textContent = currentInitials;
   localStorage.setItem("initialsText", currentInitials);
 });
 
 newHighscoreButton.addEventListener("click", function(){
-  currentHighscore = currentHighscore + 1;
+  currentHighscore = score;
   highscore.textContent = currentHighscore;
-  localStorage.setItem("highscore", currentHighscore);
+  localStorage.setItem("highscoreSpan", currentHighscore);
 });
 
 clearButton.addEventListener("click", function(){
@@ -93,6 +110,21 @@ var questions = [
     question: "Who is Ashley?",
     answers: ["Ashley is an accountant", "B", "C", "D"],
     correctAnswer: "Ashley is an accountant"
+  },
+  {
+    question: "How do you book a cash receipt?",
+    answers: ["A", "B", "Credit AR, Debit Cash", "D"],
+    correctAnswer: "Credit AR, Debit Cash"
+  },
+  {
+    question: "How many hours of CPEs does a CPA need to do every 3 years?",
+    answers: ["A", "B", "C", "120"],
+    correctAnswer: "120"
+  },
+  {
+    question: "What is the slogan for being an accountant?",
+    answers: ["A", "Be audit you can be", "C", "D"],
+    correctAnswer: "Be audit you can be"
   }
 ]
 
@@ -115,7 +147,7 @@ function askQuestions() {
 }
 
 function nextQuestion() {
-  if (questionNumber < questions.length){
+  if (questionNumber < questions.length -1){
     questionNumber++;
     askQuestions();
   }else{
