@@ -1,6 +1,6 @@
 var timeEl = document.getElementById("time");
 var gameOverEl = document.getElementById("game-over");
-var secondsLeft = 30;
+var secondsLeft = 0;
 var timerInterval = null;
 
 function startScreen() {
@@ -9,6 +9,7 @@ function startScreen() {
   document.getElementById("questionBox").style.display = "none";
   document.getElementById("goBackBox").style.display = "none";
   document.getElementById("start").style.display = "block"
+  document.getElementById("score").textContent = 0;
   gameOverEl.style.display = "none";
 }
 
@@ -19,9 +20,12 @@ var score = 0;
 
 function beginGame() {
     score = 0;
+    timeEl.textContent = 30;
+    secondsLeft = 30;
     var startDisplay = document.getElementById("start");
     startDisplay.style.display = "none";
     document.getElementById("questionBox").style.display = "block";
+    questionNumber = 0;
     setTime();
     askQuestions();
 }
